@@ -7,6 +7,6 @@
 	
 	$connection = 'host='.$host.' port='.$port.' dbname='.$dbname.' user='.$user.' password='.$passw;
 	
-	$db = pg_connect($connection);
+	$con = pg_connect($connection);
 
 ?>

@@ -1,11 +1,51 @@
+<?php require_once('Include/Sessions.php'); ?> 
+<?php require_once('Include/functions.php') ?> 
+<?php ConfirmLogin(); ?>
 <?php
        
 
 include('header.php');
  ?>
- <?php require_once('Include/functions.php') ?>
-<?php require_once('Include/Sessions.php') ?>
-<?php ConfirmLogin(); ?>
+<?php
+
+date_default_timezone_set('Asia/Manila');
+$time = time();
+if ( isset( $_POST['post-submit'])) {
+	$title = pg_escape_string($con, $_POST['post-title']);
+	$category = pg_escape_string($con, $_POST['post-category']);
+	//$content = pg_escape_string($con, $_POST['post-content']);
+	$image = $_FILES['post-image']['name'];
+	//$author = $_SESSION['username'];
+	$dateTime = strftime('%Y-%m-%d',$time);
+	$title_length = strlen($title);
+	//$content_lenght = strlen($content);
+	$imageDirectory = "Upload/Gallery/" . basename($_FILES['post-image']['name']);
+	if ( empty($title)) {
+		$_SESSION['errorMessage'] = "Title Is Emtpy";
+		Redirect_To('Newgallery.php');
+	}else if ( $title_length > 50) {
+		$_SESSION['errorMessage'] = "Title Is Too Long";
+		Redirect_To('Newgallery.php');
+	}else if ( empty($category)) {
+		$_SESSION['errorMessage'] = "category Is Empty";
+		Redirect_To('Newgallery.php');
+	}else {
+		$query = "INSERT INTO test.gallery (post_date_time, title, category, image) 
+		VALUES ('$dateTime', '$title', '$category',  '$image')";
+		$exec = pg_query($query);
+		if ($exec) {
+			move_uploaded_file($_FILES['post-image']['tmp_name'], $imageDirectory);
+			$_SESSION['successMessage'] = "Post Added Successfully";
+		}else {
+			$_SESSION['errorMessage'] = "Something Went Wrong Please Try Again";
+
+		}
+
+	}
+}
+?>
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -42,7 +82,7 @@ include('header.php');
                         <a href="dashboardnew.php"><i class="fa fa-dashboard "></i>Dashboard</a>
                     </li>
                     <li>
-                        <a class="active-menu" href="#"><i class="fa fa-desktop "></i>Form<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-desktop "></i>Form<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="formm.html"><i class="fa fa-desktop"></i>Form Builder</a>
@@ -82,7 +122,7 @@ include('header.php');
                         </ul>
                     </li>
                     <li>
-                            <a href="#"><i class="fa fa-anchor "></i>Gallery<span class="fa arrow"></span></a>
+                            <a class="active-menu"  href="#"><i class="fa fa-anchor "></i>Gallery<span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level">
                                 <li>
                                     <a href="Newgallery.php"><i class="fa fa-plus"></i>Add Gallery</a>
@@ -142,106 +182,74 @@ include('header.php');
 
         </nav>
         <!-- /. NAV SIDE  -->
-        <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
            <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line"> ADMIN DASHBOARD</h1>
+                        <h1 class="page-head-line"> ADD GALLERY</h1>
                         <?php echo SuccessMessage(); ?>
 					<?php echo Message(); ?>
-                        <h1 class="page-subhead-line">INFORMATION SERVICES DIVISION (ISD) </h1>
+                        <h1 class="page-subhead-line">INFORMATION SERVICES DIVISION(ISD) </h1>
                     </div>
                 </div>
-                <div class="col-lg-12">
-                    <div class="table-wrapper">
-                        <div class="table-title">
-                            <div class="row">
-                                
-                               
-                <div class="col-lg-12">
-                        <h2>List of Employees</h2> <a href="add.php?" type="button" class="btn btn-xs btn-info">Add New</a>
-                        <br><br> </div>  
-                           
-                        <div class="col-lg-12">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Employee Name</th>
-                                        <th>Designation</th>
-                                        <th>Staff No</th>
-                                       
-                                        <th>Contact</th>
-                                        <th>Email</th>
-                                        <th>ext</th>
-                                        <th>Options</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                 <?php                  
-                $query = 'SELECT * FROM test.people';
-                    $result = pg_query($con, $query) or die (pg_error($con));
-                  
-                        while ($row = pg_fetch_assoc($result)) {
-                                             
-                            echo '<tr>';
-                            echo '<td>'. $row['employee'].'</td>';
-                            echo '<td>'. $row['designation'].'</td>';
-                            echo '<td>'. $row['staff_no'].'</td>';
-                           // echo '<td>'. $row['address'].'</td>';
-                            echo '<td>'. $row['contact'].'</td>';
-                            echo '<td>'. $row['email'].'</td>' ;
-                            echo '<td>'. $row['ext'].'</td>' ;
-                           
-                            echo ' <td><a  type="button" class="btn btn-xs btn-warning" href="edit.php?action=edit & id='.$row['people_id'] . '"> EDIT </a> ';
-                            echo ' <a  type="button" class="btn btn-xs btn-danger" href="del.php?type=people&delete & id=' . $row['people_id'] . '">DELETE </a> </td>';
-                            echo '</tr> ';
-                }
-            ?> 
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
+			<div class="col-xs-10">
+			
+					<?php echo Message(); ?>
+					<?php echo SuccessMessage(); ?>
+					<form action="Newgallery.php" method="POST" enctype="multipart/form-data">
+						<fieldset>
+							<div class="form-group">
+								<labal for="post-title">Title</labal>
+								<input type="text" name="post-title" class="form-control" id="post-title">
+							</div>
+							<div class="form-group">
+								<labal for="post-category">Department</labal>
+								<select class="form-control" name="post-category" id="post-category">
+								<?php
+										$sql = "SELECT * FROM test.cms_category";
+										$exec = pg_query($sql);
+										while($row = pg_fetch_assoc($exec)){
+											echo "<option>$row[cat_name]</option>";
+										}
+									?>
+								</select>
+							</div>
+							<div class="form-group">
+								<labal for="post-image">Feature Image</labal>
+								<input type="File" name="post-image" class="form-control">
+							</div>
+							
+							<div class="form-group">
+								<button name="post-submit" class="btn btn-primary form-control">Publish</button>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+            <!-- /. PAGE INNER  -->
         </div>
+        <!-- /. PAGE WRAPPER  -->
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-    </div>
+    <!-- /. WRAPPER  -->
     <div id="footer-sec">
-        &copy; 2019 Northport (Malaysia) BHD </a>
-    </div>
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
+        &copy; 2019 Northport (Malaysia) BHD </a> </div>
+    <!-- /. FOOTER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
     <script src="assets/js/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP SCRIPTS -->
     <script src="assets/js/bootstrap.js"></script>
+     <!-- PAGE LEVEL SCRIPTS -->
+    <script src="assets/js/jquery.prettyPhoto.js"></script>
+    <script src="assets/js/jquery.mixitup.min.js"></script>
     <!-- METISMENU SCRIPTS -->
     <script src="assets/js/jquery.metisMenu.js"></script>
     <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
-
-    </body>
-
+     <!-- CUSTOM Gallery Call SCRIPTS -->
+    <script src="assets/js/galleryCustom.js"></script>
+</body>
 </html>

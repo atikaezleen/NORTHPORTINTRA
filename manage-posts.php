@@ -1,14 +1,9 @@
-<?php
-       
-
-include('header.php');
- ?>
- <?php require_once('Include/functions.php') ?>
 <?php require_once('Include/Sessions.php') ?>
+<?php require_once('Include/functions.php') ?>
 <?php ConfirmLogin(); ?>
+<?php include('header.php');?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<html>
 
 <body>
 <div id="wrapper">
@@ -42,7 +37,7 @@ include('header.php');
                         <a href="dashboardnew.php"><i class="fa fa-dashboard "></i>Dashboard</a>
                     </li>
                     <li>
-                        <a class="active-menu" href="#"><i class="fa fa-desktop "></i>Form<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-desktop "></i>Form<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="formm.html"><i class="fa fa-desktop"></i>Form Builder</a>
@@ -56,7 +51,7 @@ include('header.php');
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-yelp "></i>News <span class="fa arrow"></span></a>
+                        <a class="active-menu" href="#"><i class="fa fa-yelp "></i>News <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="add-post.php"><i class="fa fa-plus"></i>Add News</a>
@@ -142,67 +137,83 @@ include('header.php');
 
         </nav>
         <!-- /. NAV SIDE  -->
-        <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
            <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line"> ADMIN DASHBOARD</h1>
+                        <h1 class="page-head-line"> NEWS ANNOUNCEMENT</h1>
                         <?php echo SuccessMessage(); ?>
 					<?php echo Message(); ?>
                         <h1 class="page-subhead-line">INFORMATION SERVICES DIVISION (ISD) </h1>
                     </div>
                 </div>
-                <div class="col-lg-12">
+				<div class="col-lg-12">
                     <div class="table-wrapper">
                         <div class="table-title">
                             <div class="row">
-                                
-                               
-                <div class="col-lg-12">
-                        <h2>List of Employees</h2> <a href="add.php?" type="button" class="btn btn-xs btn-info">Add New</a>
-                        <br><br> </div>  
-                           
-                        <div class="col-lg-12">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Employee Name</th>
-                                        <th>Designation</th>
-                                        <th>Staff No</th>
-                                       
-                                        <th>Contact</th>
-                                        <th>Email</th>
-                                        <th>ext</th>
-                                        <th>Options</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                 <?php                  
-                $query = 'SELECT * FROM test.people';
-                    $result = pg_query($con, $query) or die (pg_error($con));
-                  
-                        while ($row = pg_fetch_assoc($result)) {
-                                             
-                            echo '<tr>';
-                            echo '<td>'. $row['employee'].'</td>';
-                            echo '<td>'. $row['designation'].'</td>';
-                            echo '<td>'. $row['staff_no'].'</td>';
-                           // echo '<td>'. $row['address'].'</td>';
-                            echo '<td>'. $row['contact'].'</td>';
-                            echo '<td>'. $row['email'].'</td>' ;
-                            echo '<td>'. $row['ext'].'</td>' ;
-                           
-                            echo ' <td><a  type="button" class="btn btn-xs btn-warning" href="edit.php?action=edit & id='.$row['people_id'] . '"> EDIT </a> ';
-                            echo ' <a  type="button" class="btn btn-xs btn-danger" href="del.php?type=people&delete & id=' . $row['people_id'] . '">DELETE </a> </td>';
-                            echo '</tr> ';
-                }
-            ?> 
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+							<div class="col-lg-12">
+				<div>
+					<h1>News</h1>
+				
+					<div class="table-responsive">
+						
+							<?php
+							$sql = "SELECT * FROM test.tbl_posts ORDER BY news_date_time";
+							$exec = pg_query($sql);
+							$postNo = 1;
+							if(pg_num_rows($exec) < 1	) {
+								?>
+									<p class="lead">You Have 0 Post For The Moment</p>
+									<a href="add-post.php"><button class="btn btn-info">Add Post</button></a>
+								<?php
+							}else{ ?>
+							<table class="table table-hover">
+							<tr>
+								<th>News No.</th>
+								<th>News Date</th>
+								<th>Date Title</th>
+								
+								<th>Department</th>
+								<th>Feature Image</th>
+								<th>Comments</th>
+								<th>Action</th>
+								<th>Details</th>
+							</tr>
+							<?php
+								while ($post = pg_fetch_assoc($exec)) {
+									$post_id = $post['news_id'];
+									$post_date = $post['news_date_time'];
+									$post_title = $post['title'];
+									$category = $post['category'];
+									//$author = "Admin";
+									$image = $post['image'];
+									?>
+									<tr>
+									<td><?php echo $postNo; ?></td>
+									<td><?php echo $post_date; ?></td>
+									<td><?php 
+									if(strlen($post_title) > 20 ) {
+										echo substr($post_title,0,20) . '...';
+									}else {
+										echo $post_title;
+									}
+					
+									?></td>
+								
+									<td><?php echo $category; ?></td>
+									<td><?php echo "<img class='img-responsive' src='Upload/Image/$image' width='100px' height='150px'>"; ?></td>
+									<td><?php echo 'Ongoing'; ?></td>
+									<td><?php echo "<a href='edit-post.php?post_id=$post_id'>Edit</a> | <a href='deletepost.php?delete_post_id=$post_id'>Delete</a>"; ?></td>
+									<td><a href="Post.php?id=<?php echo $post_id; ?>"><button class="btn btn-primary">Live Preview</button></a></td>
+									</tr>
+									<?php
+									$postNo++;
+								}
+							}
+							?>
+						</table>
+					</div>
+					</div>
                 </div>
                 </div>
             </div>
