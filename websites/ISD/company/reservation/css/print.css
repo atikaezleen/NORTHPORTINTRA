@@ -1,0 +1,15 @@
+.hideme,.nav,.header,.inquiry,.footer-amp,hr,header{
+	display: none;
+
+}
+.title{
+	text-align: center!important;
+}
+
+ .section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+	right: 100px;
+    
+  }

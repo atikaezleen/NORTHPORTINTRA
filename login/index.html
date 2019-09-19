@@ -1,0 +1,88 @@
+<?php require "connection.php"; ?>
+
+
+<?php
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+<style>
+body, html {
+  height: 99%;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("org3.jpg");
+
+  /* Full height */
+  height: 101%; 
+
+  opacity:0.8;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+</style>
+</head>
+
+<body>
+
+<div class="bg">
+<div class="logo text-center">
+  <h1></h1>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br>
+<div class="wrapper">
+  <div class="inner-warpper text-center">
+    <h2 class="title"> <img src="logo.png" alt="logo" style="height:90px;"></h2>
+	<h3>WELCOME TO INTRANET</h3>
+    <form action="" id="formvalidate">
+      <div class="input-group">
+	    <label class="palceholder" for="userName">Username</label>
+        <input class="form-control" name="userName" id="userName" type="text" placeholder="" required>
+        <span class="lighting"></span>
+      </div>
+      <div class="input-group">
+        <label class="palceholder" for="userPassword">Password</label>
+        <input class="form-control" name="userPassword" id="userPassword" type="password" placeholder="" />
+        <span class="lighting"></span>
+      </div>
+
+      <button type="submit" id="login">Login</button>
+      <div class="clearfix supporter">
+        <div class="pull-left remember-me">
+        <a class="forgot pull-right" href="#">Register Me</a>
+        </div>
+        <a class="forgot pull-right" href="#">Forgot Password?</a>
+		      
+      </div>
+    </form>
+  </div>
+  
+</div>
+
+
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
