@@ -1,5 +1,5 @@
 <?php
- $db = pg_connect("host=localhost dbname=db_intra user=postgres password=abc123");
+ include ('db.php');
  date_default_timezone_set('Asia/Kuala_Lumpur');
   $error="";
 if (isset($_GET["key"]) && isset($_GET["email"]) && isset($_GET["action"]) 
@@ -7,7 +7,7 @@ if (isset($_GET["key"]) && isset($_GET["email"]) && isset($_GET["action"])
   $key = $_GET["key"];
   $email = $_GET["email"];
   $curDate = date("Y-m-d H:i:s");
-  $query = pg_query($db,
+  $query = pg_query($con,
   "SELECT * FROM password_reset_temp WHERE key='".$key."' and email='".$email."';"
   );
   $row = pg_num_rows($query);
@@ -68,7 +68,7 @@ pg_query($db,
 WHERE email='".$email."';"
 );
  
-pg_query($db,"DELETE FROM password_reset_temp WHERE email='".$email."';");
+pg_query($con,"DELETE FROM password_reset_temp WHERE email='".$email."';");
 	
 echo '<div class="error"><p>Congratulations! Your password has been updated successfully.</p>
 <p><a href="http://localhost/NORTHPORTINTRA/login_intra/index.php">
