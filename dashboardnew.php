@@ -1,14 +1,10 @@
-<?php
-       
-
-include('header.php');
- ?>
- <?php require_once('Include/functions.php') ?>
 <?php require_once('Include/Sessions.php') ?>
+<?php require_once('Include/functions.php') ?>
 <?php ConfirmLogin(); ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php include('header.php');?>
 
+<!DOCTYPE html>
+<html>
 
 <body>
 <div id="wrapper">
@@ -39,10 +35,10 @@ include('header.php');
                 <ul class="nav" id="main-menu">
                 
                     <li>
-                        <a href="dashboardnew.php"><i class="fa fa-dashboard "></i>Dashboard</a>
+                        <a class="active-menu" href="dashboardnew.php"><i class="fa fa-dashboard "></i>Dashboard</a>
                     </li>
                     <li>
-                        <a class="active-menu" href="#"><i class="fa fa-desktop "></i>Form<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-desktop "></i>Form<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="formm.html"><i class="fa fa-desktop"></i>Form Builder</a>
@@ -142,7 +138,6 @@ include('header.php');
 
         </nav>
         <!-- /. NAV SIDE  -->
-        <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
            <div id="page-inner">
                 <div class="row">
@@ -151,58 +146,113 @@ include('header.php');
                         <?php echo SuccessMessage(); ?>
 					<?php echo Message(); ?>
                         <h1 class="page-subhead-line">INFORMATION SERVICES DIVISION (ISD) </h1>
+                        <h1 class="page-subhead-line"href="#"><span class = "label label-info"><i class="fa fa-calendar"></i></span> <?php echo date("F d, Y");?></h1>   
+
+                         
                     </div>
                 </div>
-                <div class="col-lg-12">
-                    <div class="table-wrapper">
-                        <div class="table-title">
-                            <div class="row">
-                                
-                               
-                <div class="col-lg-12">
-                        <h2>List of Employees</h2> <a href="add.php?" type="button" class="btn btn-xs btn-info">Add New</a>
-                        <br><br> </div>  
-                           
-                        <div class="col-lg-12">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Employee Name</th>
-                                        <th>Designation</th>
-                                        <th>Staff No</th>
-                                       
-                                        <th>Contact</th>
-                                        <th>Email</th>
-                                        <th>ext</th>
-                                        <th>Options</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                 <?php                  
-                $query = 'SELECT * FROM test.people';
-                    $result = pg_query($con, $query) or die (pg_error($con));
-                  
-                        while ($row = pg_fetch_assoc($result)) {
-                                             
-                            echo '<tr>';
-                            echo '<td>'. $row['employee'].'</td>';
-                            echo '<td>'. $row['designation'].'</td>';
-                            echo '<td>'. $row['staff_no'].'</td>';
-                           // echo '<td>'. $row['address'].'</td>';
-                            echo '<td>'. $row['contact'].'</td>';
-                            echo '<td>'. $row['email'].'</td>' ;
-                            echo '<td>'. $row['ext'].'</td>' ;
-                           
-                            echo ' <td><a  type="button" class="btn btn-xs btn-warning" href="edit.php?action=edit & id='.$row['people_id'] . '"> EDIT </a> ';
-                            echo ' <a  type="button" class="btn btn-xs btn-danger" href="del.php?type=people&delete & id=' . $row['people_id'] . '">DELETE </a> </td>';
-                            echo '</tr> ';
-                }
-            ?> 
+
+                        <div class="row">
+                        
+<a href="Dashboard.php">
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="card-box widget-box-one">
+                                    <i class="mdi mdi-chart-areaspline widget-one-icon"></i>
+                                    <div class="wigdet-one-content">
+                                        <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="Statistics">Blog Listed</p>
+<?php $query=pg_query($con,"select * from test.cms_post ");
+$countcat=pg_num_rows($query);
+?>
+
+                                        <h2><?php echo htmlentities($countcat);?> <small></small></h2>
                                     
-                                </tbody>
-                            </table>
+                                    </div>
+                                </div>
+                            </div></a><!-- end col -->
+<a href="manage-posts.php">
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="card-box widget-box-one">
+                                    <i class="mdi mdi-layers widget-one-icon"></i>
+                                    <div class="wigdet-one-content">
+                                        <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="User This Month">News Listed</p>
+<?php $query=pg_query($con,"select * from test.tbl_posts ");
+$countsubcat=pg_num_rows($query);
+?>
+                                        <h2><?php echo htmlentities($countsubcat);?> <small></small></h2>
+                              
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+</a>
+
+     <a href="DashGallery.php">                       
+        <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="card-box widget-box-one">
+                                    <i class="mdi mdi-layers widget-one-icon"></i>
+                                    <div class="wigdet-one-content">
+                                        <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="User This Month">Gallery</p>
+<?php $query=pg_query($con,"select * from test.gallery ");
+$countposts=pg_num_rows($query);
+?>
+                                        <h2><?php echo htmlentities($countposts);?> <small></small></h2>
+                              
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+</a>
+<a href="#">                       
+        <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="card-box widget-box-one">
+                                    <i class="mdi mdi-layers widget-one-icon"></i>
+                                    <div class="wigdet-one-content">
+                                        <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="User This Month">Pending</p>
+<?php $query=pg_query($con,"select * from test.gallery ");
+$countposts=pg_num_rows($query);
+?>
+                                        <h2><?php echo htmlentities($countposts);?> <small></small></h2>
+                              
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+</a>
+<a href="#">                       
+        <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="card-box widget-box-one">
+                                    <i class="mdi mdi-layers widget-one-icon"></i>
+                                    <div class="wigdet-one-content">
+                                        <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="User This Month">Approved</p>
+<?php $query=pg_query($con,"select * from test.gallery ");
+$countposts=pg_num_rows($query);
+?>
+                                        <h2><?php echo htmlentities($countposts);?> <small></small></h2>
+                              
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+</a>
+
+                  
                         </div>
-                    </div>
+                        <!-- end row -->
+   
+   
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+
+            </div>
+
+
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+
+      
+                            </div>
+					</div>
                 </div>
                 </div>
             </div>

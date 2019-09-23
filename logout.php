@@ -1,9 +1,11 @@
 <?php
 session_start();
-// Destroying All Sessions
-if(session_destroy())
-{
-// Redirecting To Home Page
-header("Location: login/index.php");
-}
+include("includes/config.php");
+$_SESSION['login']=="";
+session_unset();
+session_destroy();
+
 ?>
+<script language="javascript">
+document.location="index.php";
+</script>
