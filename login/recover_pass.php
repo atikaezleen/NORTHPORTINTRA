@@ -1,6 +1,6 @@
 
 <?php
- $db = pg_connect("host=localhost dbname=db_intra user=postgres password=abc123");
+ include('db.php');
  
  $error="";
  date_default_timezone_set('Asia/Kuala_Lumpur');
@@ -12,7 +12,7 @@ if (!$email) {
    $error .="<p>Invalid email address please type a valid email address!</p>";
    }else{
    $sel_query = "SELECT * FROM tbl_employee WHERE email='".$email."'" ;
-   $results = pg_query($db,$sel_query);
+   $results = pg_query($con,$sel_query);
    $row = pg_num_rows($results);
    if ($row==""){
    $error .= "<p>No user is registered with this email address!</p>";
