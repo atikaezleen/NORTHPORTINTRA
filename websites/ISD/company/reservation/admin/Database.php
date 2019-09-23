@@ -9,4 +9,3 @@ $connection = 'host='.$host.' port='.$port.' dbname='.$dbname.' user='.$user.' p
 
 $con = pg_connect($connection);
 ?> 
-//testing edit..
