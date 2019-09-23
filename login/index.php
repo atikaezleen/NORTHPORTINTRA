@@ -38,7 +38,7 @@ body, html {
   <h1></h1>
 </div>
 <?php
- $db = pg_connect("host=localhost dbname=db_intra user=postgres password=abc123");
+ include('db.php');
 session_start();
 // If form submitted, insert values into the database.
 if (isset($_POST['emp_staff_no'])){
