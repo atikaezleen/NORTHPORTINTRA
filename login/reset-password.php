@@ -52,8 +52,8 @@ if($error!=""){
 if(isset($_POST["email"]) && isset($_POST["action"]) &&
  ($_POST["action"]=="update")){
 $error="";
-$pass1 = pg_escape_string($db,$_POST["pass1"]);
-$pass2 =pg_escape_string($db,$_POST["pass2"]);
+$pass1 = pg_escape_string($con,$_POST["pass1"]);
+$pass2 =pg_escape_string($con,$_POST["pass2"]);
 $email = $_POST["email"];
 $curDate = date("Y-m-d H:i:s");
 if ($pass1!=$pass2){
@@ -63,7 +63,7 @@ $error.= "<p>Password do not match, both password should be same.<br /><br /></p
 echo "<div class='error'>".$error."</div><br />";
 }else{
 $pass1 = md5($pass1);
-pg_query($db,
+pg_query($con,
 "UPDATE tbl_employee SET password='".$pass1."', trn_date='".$curDate."' 
 WHERE email='".$email."';"
 );
