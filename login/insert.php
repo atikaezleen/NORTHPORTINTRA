@@ -1,5 +1,5 @@
 <?php
-  $db_connection = pg_connect("host=localhost port=5432 dbname=db_intra user=postgres password=abc123");
+  include('db.php');
   $first_name = pg_escape_string( $_POST['first_name']);   
   $last_name = pg_escape_string($_POST['last_name']); 
   $emp_staff_no = intval($_POST['emp_staff_no']); 
