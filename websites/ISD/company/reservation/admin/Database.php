@@ -8,4 +8,5 @@ $passw = "abc123";
 $connection = 'host='.$host.' port='.$port.' dbname='.$dbname.' user='.$user.' password='.$passw;
 
 $con = pg_connect($connection);
-?>
+?> 
+//testing edit..
