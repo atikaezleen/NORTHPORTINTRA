@@ -1,2 +1,2 @@
 
-already update db connectin for login
+already update db connection for login
