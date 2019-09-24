@@ -1,8 +1,9 @@
-<?php //session_start();
-//if(empty($_SESSION['id'])):
-
-//endif;
+<?php session_start();
+if(empty($_SESSION['id'])):
+header('Location:index.php');
+endif;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
