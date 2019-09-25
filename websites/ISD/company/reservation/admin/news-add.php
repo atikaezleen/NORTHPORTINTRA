@@ -116,62 +116,69 @@ a[href$=".pdf"] {
 
        <!-- Matter -->
 
-      <div id="page-wrapper">
-           <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="page-head-line">ADD NEW ANNOUNCEMENT</h1>
-                        
-         
-                        <h1 class="page-subhead-line">INFORMATION SERVICES DIVISION (ISD) </h1>
-                    </div>
-                </div>
-      <div class="col-xs-10">
-        
-          
+       <div class="matter">
+        <div class="container">
           <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="p-6">
-                                    <div class="">
-                                    <form action="news-add.php" method="POST" enctype="multipart/form-data">
-            <fieldset>
-              <div class="form-group">
-                <labal for="post-title">Title</labal>
-                <input type="text" name="post-title" class="form-control" id="post-title">
-              </div>
-              <div class="form-group">
-                <labal for="post-category">Department</labal>
-                <select class="form-control" name="post-category" id="post-category">
-                <?php
-                    $sql = "SELECT * FROM test.cms_category";
-                    $exec = pg_query($sql);
-                    while($row = pg_fetch_assoc($exec)){
-                      echo "<option>$row[cat_name]</option>";
-                    }
-                  ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <labal for="post-image">Feature Image</labal>
-                <input type="File" name="post-image" class="form-control">
-              </div>
-              <div class="form-group">
-                <labal for="post-content">Content</labal>
-                <textarea rows="10" class="form-control" name="post-content" id="post-content">
-                  
-                </textarea>
-              </div>
-              <div class="form-group">
-                <button name="post-submit" class="btn btn-primary form-control">Publish</button>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-    <!-- Matter ends -->
+            <div class="col-md-12">
+
+              <div class="widget">
+                <div class="widget-head">
+                  <div class="pull-left"> Add News
+		
+                  </div>
+                  <div class="widget-icons pull-right">
+                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a> 
+                    <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                  </div>  
+                  <div class="clearfix"></div>
+                </div>
+                <div class="widget-content">
+                  <div class="padd">
+                    
+              <!-- Table Page -->
+              <div class="page-tables">
+                <!-- Table -->
+                <div class="table-responsive">
+                  <table cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
+
+					<form action="blog-add.php" method="POST" enctype="multipart/form-data">
+						<fieldset>
+							<div class="form-group">
+								<labal for="post-title">Title</labal>
+								<input type="text" name="post-title" class="form-control" id="post-title">
+							</div>
+							<div class="form-group">
+								<labal for="post-category">Department</labal>
+								<select class="form-control" name="post-category" id="post-category">
+								<?php
+										$sql = "SELECT * FROM test.cms_category";
+										$exec = pg_query($sql);
+										while($row = pg_fetch_assoc($exec)){
+											echo "<option>$row[cat_name]</option>";
+										}
+									?>
+								</select>
+							</div>
+							<div class="form-group">
+								<labal for="post-image">Feature Image</labal>
+								<input type="File" name="post-image" class="form-control">
+							</div>
+							<div class="form-group">
+								<labal for="post-content">Content</labal>
+								<textarea rows="10" class="form-control" name="post-content" id="post-content">
+									
+								</textarea>
+							</div>
+							<div class="form-group">
+								<button name="post-submit" class="btn btn-primary form-control">Publish</button>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
 
 
     </div>
