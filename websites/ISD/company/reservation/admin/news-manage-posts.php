@@ -118,24 +118,30 @@ a[href$=".pdf"] {
 
        <!-- Matter -->
 
-      <div id="page-wrapper">
-           <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="page-head-line"> NEWS ANNOUNCEMENT</h1>
-                       
-                        <h1 class="page-subhead-line">INFORMATION SERVICES DIVISION (ISD) </h1>
-                    </div>
+            <div class="matter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+
+              <div class="widget">
+                <div class="widget-head">
+                  <div class="pull-left"> News 
+	
+                  </div>
+                  <div class="widget-icons pull-right">
+                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a> 
+                    <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                  </div>  
+                  <div class="clearfix"></div>
                 </div>
-        <div class="col-lg-12">
-                    <div class="table-wrapper">
-                        <div class="table-title">
-                            <div class="row">
-              <div class="col-lg-12">
-        <div>
-          <h1>News</h1>
-        
-          <div class="table-responsive">
+                <div class="widget-content">
+                  <div class="padd">
+                    
+              <!-- Table Page -->
+              <div class="page-tables">
+                <!-- Table -->
+                <div class="table-responsive">
+                  <table cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
             
               <?php
               $sql = "SELECT * FROM test.tbl_posts ORDER BY news_date_time";
