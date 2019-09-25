@@ -117,16 +117,30 @@ a[href$=".pdf"] {
 
        <!-- Matter -->
 
-<div id="page-wrapper">
-           <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="page-head-line">ADD NEW BLOG</h1>
+  <div class="matter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
 
-                        <h1 class="page-subhead-line">INFORMATION SERVICES DIVISION (ISD) </h1>
-                    </div>
+              <div class="widget">
+                <div class="widget-head">
+                  <div class="pull-left"> Add Blog
+		
+                  </div>
+                  <div class="widget-icons pull-right">
+                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a> 
+                    <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                  </div>  
+                  <div class="clearfix"></div>
                 </div>
-			<div class="col-xs-10">
+                <div class="widget-content">
+                  <div class="padd">
+                    
+              <!-- Table Page -->
+              <div class="page-tables">
+                <!-- Table -->
+                <div class="table-responsive">
+                  <table cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
 
 					<form action="blog-add.php" method="POST" enctype="multipart/form-data">
 						<fieldset>
