@@ -114,30 +114,31 @@ a[href$=".pdf"] {
 
 
 
-       <!-- Matter -->
+      <div class="matter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
 
-</nav>
-        <!-- /. NAV SIDE  -->
-        <div id="page-wrapper">
-           <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="page-head-line"> BLOG</h1>
-   
-                        <h1 class="page-subhead-line">INFORMATION SERVICES DIVISION (ISD) </h1>
-                    </div>
+              <div class="widget">
+                <div class="widget-head">
+                  <div class="pull-left"> Blog 
+	
+                  </div>
+                  <div class="widget-icons pull-right">
+                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a> 
+                    <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                  </div>  
+                  <div class="clearfix"></div>
                 </div>
-				<div class="col-lg-12">
-                    <div class="table-wrapper">
-                        <div class="table-title">
-                            <div class="row">
-							<div class="col-lg-12">
-				<div>
-				
-				
-					<div class="table-responsive">
-						
-							<?php
+                <div class="widget-content">
+                  <div class="padd">
+                    
+              <!-- Table Page -->
+              <div class="page-tables">
+                <!-- Table -->
+                <div class="table-responsive">
+                  <table cellpadding="0" cellspacing="0" border="0" id="data-table" width="100%">
+				  <?php
 							$sql = "SELECT * FROM test.cms_post ORDER BY post_date_time";
 							$exec = pg_query($sql);
 							$postNo = 1;
@@ -159,6 +160,7 @@ a[href$=".pdf"] {
 								<th>Action</th>
 								<th>Details</th>
 							</tr>
+
 							<?php
 								while ($post = pg_fetch_assoc($exec)) {
 									$post_id = $post['post_id'];
@@ -191,6 +193,7 @@ a[href$=".pdf"] {
 								}
 							}
 							?>
+							
 						</table>
 					</div>
 					</div>
@@ -203,15 +206,10 @@ a[href$=".pdf"] {
     </div>
     </div>
     </div>
-            </div>
-            <!-- /.container-fluid -->
 
-        </div>
 
-   <!-- Mainbar ends -->
-   <div class="clearfix"></div>
+       <!-- Matter -->
 
-</div>
 <!-- Content ends -->
 
 <!-- Footer starts -->
