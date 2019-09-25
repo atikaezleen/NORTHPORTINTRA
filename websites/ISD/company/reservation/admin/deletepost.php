@@ -12,10 +12,10 @@ if ( isset( $_POST['post-delete'])) {
 	$exec = pg_query($sql);
 	if ($exec) {
 		echo "Post Deleted Successfully";
-		header('Location:dashboard.php');
+	header('Location:blog-manage-posts.php');
 	}else {
 		echo "Something Went Wrong, Post Is Not Deleted. Please Try Again Later";
-		header('Location:dashboard.php');
+			header('Location:blog-manage-posts.php');
 	}
 
 }else if( isset($_GET['delete_post_id'])) {
